@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-5.3.0/css/bootstrap.css">
+</head>
+
+<body>
+    <!-- 导航 -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="/">用户管理系统</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/depart/list">部门管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/list/">用户管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pretty/list/">靓号管理</a>
+                    </li>
+                </ul>
+
+                <div class="col-md-3 text-end">
+                    <button type="button" class="btn btn-outline-primary me-2">Login</button>
+                    <button type="button" class="btn btn-primary">Sign-up</button>
+                    <a class="btn btn-success" class="nav-link" href="/admin/">后台管理</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+
+
+    <script src="/static/plugins/bootstrap-5.3.0/js/bootstrap.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    {% block title %}
+    <title>模板的使用</title>
+    {% endblock %}
+</head>
+
+<body>
+
+    <div>这里是顶部</div>
+
+    {% block content %}
+    <div>这里是内容</div>
+    {% endblock %}
+
+    <div>这里是底部</div>
+</body>
+
+</html>

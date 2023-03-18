@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/pluguns/bootstrap-5.3.0/css/bootstrap.css">
+</head>
+
+<body>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+        添加
+    </button>
+
+
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h4 class="modal-title">添加内容</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- 模态框内容 -->
+                <div class="modal-body">
+                    模态框内容..
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3 mt-3">
+                            <input type="text" class="form-control" id="email" placeholder="Enter username" name="username">
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="form-floating mt-3 mb-3">
+                            <input type="text" class="form-control" id="pwd" placeholder="Enter password" name="psw">
+                            <label for="pwd">Password</label>
+                        </div>
+                        <div class="form-floating mt-3 mb-3">
+                            <input type="text" class="form-control" placeholder="age" name="age">
+                            <label for="age" class="form-label">age</label>
+                        </div>
+                        <button type="submit" class="btn btn-danger">确认添加</button>
+                    </form>
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+
+
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">关闭</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/static/pluguns/bootstrap-5.3.0/js/bootstrap.js"></script>
+</body>
+
+</html>
