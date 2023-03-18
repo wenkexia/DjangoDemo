@@ -7,7 +7,7 @@ import mdeditor.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app3', '0001_initial'),
+        ('users', '0001_initial'),
     ]
 
     operations = [

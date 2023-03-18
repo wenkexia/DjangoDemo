@@ -15,6 +15,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-2nhj(0u9!366y*@=!e5k8c=p3#9nd9q&b%o7vwsic#m4jf(dae"
 
 
+# #字母验证码
+# CAPTCHA_IMAGE_SIZE = (80, 45)   # 设置 captcha 图片大小
+# CAPTCHA_LENGTH = 4   # 字符个数
+# CAPTCHA_TIMEOUT = 1   # 超时(minutes)
+
+
+# #加减乘除验证码
+# CAPTCHA_OUTPUT_FORMAT = '%(image)s %(text_field)s %(hidden_field)s '
+# CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_null',
+#      'captcha.helpers.noise_arcs', # 线
+#      'captcha.helpers.noise_dots', # 点
+# )
+# CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
+# CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+# CAPTCHA_TIMEOUT = 1
+
 
 ALLOWED_HOSTS = []
 
@@ -32,7 +48,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     'app1',
-    'app3',
+    'users',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +67,7 @@ ROOT_URLCONF = "djangoDemo.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["templates"],
+        "DIRS": [f"{BASE_DIR}/templates",f"{BASE_DIR}/users/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -120,7 +137,7 @@ USE_TZ = True
 
 # Database
 # 数据库配置：https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DB_TYPE = "mysql"  # 数据库类型
+DB_TYPE = "sqlite3"  # 数据库类型
 if DB_TYPE == "mysql":
     DATABASES = {
         'default': {

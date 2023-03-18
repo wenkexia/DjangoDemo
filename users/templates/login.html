@@ -1,0 +1,55 @@
+{% extends 'base.html'%}
+{% block body %}
+<div class="col-md-4 col-sm-6 border p-0 offset-md-4 offset-sm-6 my-5">
+    <h3 class="text-center bg-info p-2 text-white mb-0">登录</h3>
+    <form class='p-5 bg-white' action="/users/login/" method="post">
+        {% if message %}
+        <div class="alert alert-warning">{{ message }}</div>
+        {% endif %}
+        {% csrf_token %}
+        <div class="form-group">
+            {{ login_form.username.label_tag }}
+            {{ login_form.username }}
+        </div>
+        <div class="form-group">
+            {{ login_form.password.label_tag }}
+            {{ login_form.password }}
+        </div>
+        <div class="form-group">
+            {{ login_form.captcha.errors }}
+            {{ login_form.captcha.label_tag }}
+            {{ login_form.captcha }}
+        </div>
+        <div class="pt-3 pb-5">
+            <button type="submit" class="btn btn-primary pull-left mb-5">立即登录</button>
+            <a class="btn btn-danger pull-right mb-5" href="/users/register/">前往注册</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    $(function () {
+        // Add refresh button after field (this can be done in the template as well)
+        $('img.captcha').after(
+            $('<a class="btn btn-sm text-white btn-info pull-right captcha-refresh">看不清</a>')
+        );
+
+        $('.captcha-refresh').click(function () {
+            var $form = $(this).parents('form');
+            var url = location.protocol + "//" + window.location.hostname + ":"
+                + location.port + "/captcha/refresh/";
+
+            // Make the AJAX-call
+            $.getJSON(url, {}, function (json) {
+                $form.find('input[name="captcha_0"]').val(json.key);
+                $form.find('img.captcha').attr('src', json.image_url);
+            });
+            return false;
+        });
+    });
+</script>
+{% endblock %}
+

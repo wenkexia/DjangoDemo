@@ -15,20 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 
-from django.urls import path, include,re_path
-
+from django.urls import path, include, re_path
 
 from django.views.static import serve
 from djangoDemo.settings import MEDIA_ROOT
 
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include("app1.urls"), name='app1'),
-    path('app3/',include('app3.urls'),name='app3'),
+    path('users/', include('users.urls'), name='users'),
+    path('captcha', include('captcha.urls')),
     # path('blog/',include('blog.urls'),name='blog'),
- 
-    path('mdeditor/', include(('mdeditor.urls', 'mdeditor'), namespace='mdeditor')),  # 配置编辑器路由
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),  # 添加上传文件路径
+    path('mdeditor/',
+         include(('mdeditor.urls', 'mdeditor'),
+                 namespace='mdeditor')),  # 配置编辑器路由
+    re_path(r'^media/(?P<path>.*)$', serve,
+            {'document_root': MEDIA_ROOT}),  # 添加上传文件路径
 ]
-

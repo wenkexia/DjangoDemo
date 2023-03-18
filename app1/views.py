@@ -14,7 +14,7 @@ def index(request):
         "b": 2.22,
         "c": True,
     }
-    return render(request, "app1/index.html", data)
+    return render(request, "index.html", data)
 
 
 def article(request, id):
