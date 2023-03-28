@@ -7,10 +7,17 @@ class Department(models.Model):
     '''
     title = models.CharField(verbose_name='部门名称', max_length=50)
 
-    # 重新str方法
+    # 重写str方法
+    # 在后台管理时就不是显示Subject object(1)这样晦涩的信息，而是部门的名称。
     def __str__(self):
         return self.title
 
+
+    # 后台管理时显示的名称
+    class Meta:
+        verbose_name = '部门'
+        # 指定复数显示的名称,默认是verbose_name+'s'
+        verbose_name_plural = verbose_name
 
 class UserInfo(models.Model):
     '''
@@ -42,7 +49,10 @@ class UserInfo(models.Model):
     # querryset对象.外键字段(depart).关联表字段(title)  根据员工表的外键department_id查询所关联的部门表的数据
     depart = models.ForeignKey(verbose_name='部门id', to='Department', to_field='id', on_delete=models.SET_NULL,
                                null=True)
-
+    class Meta:
+        verbose_name = '员工'
+        # 指定复数显示的名称,默认是verbose_name+'s'
+        verbose_name_plural = verbose_name
 
 class PrettyNum(models.Model):
     '''
@@ -65,3 +75,7 @@ class PrettyNum(models.Model):
         (1, '已售'),
     )
     status = models.SmallIntegerField(verbose_name='状态', choices=status_choices, default=0)
+    class Meta:
+        verbose_name = '靓号'
+        # 指定复数显示的名称,默认是verbose_name+'s'
+        verbose_name_plural = verbose_name

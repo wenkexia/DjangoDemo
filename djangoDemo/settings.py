@@ -1,19 +1,16 @@
-
-
-#超级管理员：admin root
+# 超级管理员：admin root
+# root root
 from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-2nhj(0u9!366y*@=!e5k8c=p3#9nd9q&b%o7vwsic#m4jf(dae"
-
 
 # #字母验证码
 # CAPTCHA_IMAGE_SIZE = (80, 45)   # 设置 captcha 图片大小
@@ -34,7 +31,6 @@ SECRET_KEY = "django-insecure-2nhj(0u9!366y*@=!e5k8c=p3#9nd9q&b%o7vwsic#m4jf(dae
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 # 注册app
 INSTALLED_APPS = [
@@ -50,7 +46,26 @@ INSTALLED_APPS = [
     'app1',
     'users',
     'captcha',
+    'rest_framework',
+    'drf_yasg',
+    'students.apps.StudentsConfig',
+    'snippets.apps.SnippetsConfig',
+
 ]
+
+# DRF全局配置
+REST_FRAMEWORK = {
+    # 配置全局分页
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,  # 每页数目
+    'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',  # 时间格式
+    'DEFAULT_RENDER_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -67,7 +82,7 @@ ROOT_URLCONF = "djangoDemo.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [f"{BASE_DIR}/templates",f"{BASE_DIR}/users/templates"],
+        "DIRS": [f"{BASE_DIR}/templates", f"{BASE_DIR}/users/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -81,9 +96,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "djangoDemo.wsgi.application"
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -103,10 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -117,23 +125,20 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 if DEBUG:
-    STATICFILES_DIRS = [BASE_DIR/'static']
+    STATICFILES_DIRS = [BASE_DIR / 'static']
 else:
-    STATIC_ROOT = BASE_DIR/'static'
+    STATIC_ROOT = BASE_DIR / 'static'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans' # 配置语言
-TIME_ZONE = 'Asia/Shanghai'  #时区
+LANGUAGE_CODE = 'zh-hans'  # 配置语言
+TIME_ZONE = 'Asia/Shanghai'  # 时区
 USE_I18N = True
 USE_TZ = True
-
 
 # Database
 # 数据库配置：https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -160,8 +165,6 @@ else:
         }
     }
 
-
-
 # 配置日志
 # 目的是为了在Debug模式下，我们能够看到执行ORM相关操作，底层的SQL语句是什么
 LOGGING = {
@@ -181,9 +184,6 @@ LOGGING = {
         },
     }
 }
-
-
-
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/media/'

@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
+
+
 from . import models
 from .forms import UserForm, RegisterForm
+from . import forms
 import hashlib
 
 
@@ -23,7 +26,7 @@ def login(request):
         return redirect('/index')
 
     if request.method == "POST":
-        login_form = UserForm(request.POST)
+        login_form = forms.UserForm(request.POST)
         message = "请检查填写的内容！"
         if login_form.is_valid():
             username = login_form.cleaned_data['username']
@@ -85,3 +88,14 @@ def logout(request):
         return redirect("/index/")
     request.session.flush()  # 将session中的所有内容全部清空
     return redirect('/index/')
+
+
+from  django.contrib.auth.models  import  User
+from rest_framework import viewsets
+from .serializers import UserSerializer
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    用于查看和编辑用户实例的视图集。
+    """
+    serializer_class = UserSerializer
+    queryset = User.objects.all()

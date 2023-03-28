@@ -8,13 +8,21 @@ from django.contrib import admin
 
 app_name = 'users'
 
-urlpatterns = [
-    path('', views.index, name='index'),  # 首页
-    path('login/', views.login, name='login'),  # 登录
+from .views import UserViewSet
+from rest_framework.routers import DefaultRouter
 
-    path('admin', admin.site.urls),
+router = DefaultRouter()
+router.register(r'users', UserViewSet)
+urlpatterns = router.urls
 
-    path('index/', views.index),
-    path('register/', views.register),
-    path('logout/', views.logout),
-]
+#
+# urlpatterns = [
+#     path('', views.index, name='index'),  # 首页
+#     path('login/', views.login, name='login'),  # 登录
+#
+#     path('admin', admin.site.urls),
+#
+#     path('index/', views.index),
+#     path('register/', views.register),
+#     path('logout/', views.logout),
+# ]
